@@ -1,6 +1,10 @@
 package com.example.demo;
 
 import com.example.demo.config.SpringitProperties;
+import com.example.demo.model.Comment;
+import com.example.demo.model.Link;
+import com.example.demo.repository.CommentRepository;
+import com.example.demo.repository.LinkRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +14,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
 @EnableConfigurationProperties(SpringitProperties.class)
+@EnableJpaAuditing
 public class SpringitApplication {
 
 	//@Autowired
@@ -26,14 +32,14 @@ public class SpringitApplication {
 
 	@Bean
 	//@Profile("dev")
-	CommandLineRunner runner(){
+	CommandLineRunner runner(LinkRepository linkRepository, CommentRepository commentRepository){
 		return args -> {
-			//System.out.println("Welcome dev: ");
-			log.error("CommandLineRunner.run();");
-			log.warn("CommandLineRunner.run();");
-			log.info("CommandLineRunner.run();");
-			log.debug("CommandLineRunner.run();");
-			log.trace("CommandLineRunner.run();");
+			Link link = new Link("Getting Started with Spring Boot 2", "http://therealdanvega.com/spring-boot-2");
+			linkRepository.save(link);
+
+			Comment comment = new Comment("Comment test", link);
+			commentRepository.save(comment);
+			link.addComment(comment);
 		};
 	}
 
