@@ -5,6 +5,7 @@ import com.example.demo.model.Comment;
 import com.example.demo.model.Link;
 import com.example.demo.repository.CommentRepository;
 import com.example.demo.repository.LinkRepository;
+import org.ocpsoft.prettytime.PrettyTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
-@EnableConfigurationProperties(SpringitProperties.class)
+//@EnableConfigurationProperties(SpringitProperties.class)
 @EnableJpaAuditing
 public class SpringitApplication {
 
@@ -31,6 +32,11 @@ public class SpringitApplication {
 	}
 
 	@Bean
+	PrettyTime prettyTime(){
+		return new PrettyTime();
+	}
+
+	/*@Bean
 	//@Profile("dev")
 	CommandLineRunner runner(LinkRepository linkRepository, CommentRepository commentRepository){
 		return args -> {
@@ -41,6 +47,6 @@ public class SpringitApplication {
 			commentRepository.save(comment);
 			link.addComment(comment);
 		};
-	}
+	}*/
 
 }
