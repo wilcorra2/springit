@@ -23,8 +23,8 @@ public class VoteController {
         this.linkRepository = linkRepository;
     }
 
-    @Secured({"ROLE_USER"})
-    @GetMapping("/vote/link/{linkID}/direction/{direction}/voteCount/{voteCount}")
+    //@Secured({"ROLE_USER"})
+    @GetMapping("/vote/link/{linkID}/direction/{direction}/votecount/{voteCount}")
     public int vote(@PathVariable Long linkID, @PathVariable short direction, @PathVariable int voteCount){
         Optional<Link> optionalLink = linkRepository.findById(linkID);
         if (optionalLink.isPresent()){
