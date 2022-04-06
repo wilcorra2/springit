@@ -25,19 +25,25 @@ public SecurityConfiguration(UserDetailsServiceImpl pUserDetailsService){
             .formLogin();*/
         http
                 .authorizeRequests()
-                .requestMatchers(EndpointRequest.to("info")).permitAll()
-                .requestMatchers(EndpointRequest.toAnyEndpoint()).hasRole("ADMIN")
-                .antMatchers("/actuator/").hasRole("ADMIN")
-                .antMatchers("/").permitAll()
-                .antMatchers("/link/submit").hasRole("USER")
-                .antMatchers("/link/**").permitAll()
-                .antMatchers("/").permitAll()
-                .antMatchers("/h2-console/**").permitAll()
-                .and()
+                    .requestMatchers(EndpointRequest.to("info")).permitAll()
+                    .requestMatchers(EndpointRequest.toAnyEndpoint()).hasRole("ADMIN")
+                    .antMatchers("/actuator/").hasRole("ADMIN")
+                    .antMatchers("/").permitAll()
+                    .antMatchers("/link/submit").hasRole("USER")
+                    .antMatchers("/link/**").permitAll()
+                    .antMatchers("/").permitAll()
+                    .antMatchers("/h2-console/**").permitAll()
+                    .and()
                 .formLogin()
-                .and()
+                    .loginPage("/login")
+                    .permitAll().usernameParameter("email")
+                    .and()
+                .logout()
+                    .and()
+                .rememberMe();
+                /*.and()
                 .csrf().disable()
-                .headers().frameOptions().disable();
+                .headers().frameOptions().disable();*/
     }
 
     @Override
