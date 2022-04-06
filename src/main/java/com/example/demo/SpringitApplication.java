@@ -19,7 +19,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
 //@EnableConfigurationProperties(SpringitProperties.class)
-@EnableJpaAuditing
+//@EnableJpaAuditing
 public class SpringitApplication {
 
 	//@Autowired
